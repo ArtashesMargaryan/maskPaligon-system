@@ -1,0 +1,22 @@
+{
+    "lang": {
+        "value": "en",
+        "description": "",
+        "options": ["cn", "de", "en", "es", "fr", "it", "ja", "ko", "nl", "pt", "ru", "tr", "zh", "zht"]
+    },
+    "mute": {
+        "value": "off",
+        "description": "",
+        "options": ["on", "off"]
+    },
+    "autoStart": {
+        "value": "on",
+        "description": "",
+        "options": ["on", "off"]
+    },
+    "closeBtn": {
+        "value": "on",
+        "description": "",
+        "options": ["on", "off"]
+    }
+}

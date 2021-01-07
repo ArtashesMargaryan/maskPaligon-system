@@ -1,0 +1,1 @@
+import '@armathai/pixi-stats';

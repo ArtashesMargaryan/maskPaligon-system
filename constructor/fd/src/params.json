@@ -1,0 +1,32 @@
+{
+    "lang": {
+        "value": "en",
+        "description": "",
+        "options": ["de", "en", "es", "fr", "it", "ja", "ko", "nl", "pt", "ru", "tw", "zh"]
+    },
+    "mute": {
+        "value": "off",
+        "description": "",
+        "options": ["on", "off"]
+    },
+    "autoStart": {
+        "value": "on",
+        "description": "",
+        "options": ["on", "off"]
+    },
+    "closeBtn": {
+        "value": "on",
+        "description": "",
+        "options": ["on", "off"]
+    },
+    "reward1": {
+        "value": 0,
+        "description": "",
+        "range": [0, 10]
+    },
+    "reward2": {
+        "value": 0,
+        "description": "",
+        "range": [0, 10]
+    }
+}
