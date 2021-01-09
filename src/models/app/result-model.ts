@@ -1,4 +1,4 @@
-import { ObservableModel } from './observable-model';
+import { ObservableModel } from '../observable-model';
 
 export enum ResultState {
     unknown = 'unknown',

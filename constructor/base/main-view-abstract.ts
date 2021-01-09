@@ -4,9 +4,9 @@ import { getVignetteSpriteConfig } from '../../src/constants/configs/sprite-conf
 import { AppEvent } from '../../src/events/app';
 import { AppModelEvent, StoreEvent } from '../../src/events/model';
 import { LoseViewEvent, MainViewEvent } from '../../src/events/view';
-import { AppState } from '../../src/models/app-model';
-import { GameModel } from '../../src/models/game-model';
-import { ResultState } from '../../src/models/result-model';
+import { AppState } from '../../src/models/app/app-model';
+import { ResultState } from '../../src/models/app/result-model';
+import { GameModel } from '../../src/models/game/game-model';
 import { store } from '../../src/models/store';
 import { params } from '../../src/params';
 import { makeSprite } from '../../src/utils';

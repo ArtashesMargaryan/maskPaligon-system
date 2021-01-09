@@ -1,5 +1,5 @@
-import { delayRunnable } from '../utils';
-import { ObservableModel } from './observable-model';
+import { delayRunnable } from '../../utils';
+import { ObservableModel } from '../observable-model';
 import { ResultModel } from './result-model';
 
 export enum AppState {

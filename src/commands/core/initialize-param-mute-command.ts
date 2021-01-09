@@ -1,6 +1,6 @@
 import { lego } from '@armathai/lego';
 import { Switch } from '../../constants/constants';
-import { setSuperAppMutedCommand } from '../super/set-super-app-muted-command';
+import { setSuperAppMutedCommand } from '../superapp/set-super-app-muted-command';
 
 export const initializeParamMuteCommand = (mute: string): void => {
     switch (mute) {

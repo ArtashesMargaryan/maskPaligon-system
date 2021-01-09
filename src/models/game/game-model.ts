@@ -1,5 +1,5 @@
+import { ObservableModel } from '../observable-model';
 import { HintModel } from './hint-model';
-import { ObservableModel } from './observable-model';
 
 export class GameModel extends ObservableModel {
     private _hint: HintModel = null;

@@ -1,7 +1,7 @@
-import { AppModel } from './app-model';
-import { GameModel } from './game-model';
+import { AppModel } from './app/app-model';
+import { SuperAppModel } from './app/super-app-model';
+import { GameModel } from './game/game-model';
 import { ObservableModel } from './observable-model';
-import { SuperAppModel } from './super-app-model';
 
 class Store extends ObservableModel {
     private _app: AppModel = null;

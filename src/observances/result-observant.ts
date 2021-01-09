@@ -1,7 +1,7 @@
 import { lego } from '@armathai/lego';
 import { setResultStateCommand } from '../commands/result/set-result-state-command';
-import { AppState } from '../models/app-model';
-import { ResultState } from '../models/result-model';
+import { AppState } from '../models/app/app-model';
+import { ResultState } from '../models/app/result-model';
 import { store } from '../models/store';
 
 export class ResultObservant {

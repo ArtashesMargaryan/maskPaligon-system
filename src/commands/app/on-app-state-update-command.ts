@@ -1,8 +1,8 @@
 import { lego } from '@armathai/lego';
 import { firstGameGuard } from '../../guards/first-game-guard';
 import { hintModelGuard } from '../../guards/hint-model-guard';
-import { AppState } from '../../models/app-model';
-import { ResultState } from '../../models/result-model';
+import { AppState } from '../../models/app/app-model';
+import { ResultState } from '../../models/app/result-model';
 import { destroyGameModelCommand } from '../game/destroy-game-model-command';
 import { initializeGameModelCommand } from '../game/initialize-game-model-command';
 import { destroyHintModelCommand } from '../hint/destroy-hint-model-command';

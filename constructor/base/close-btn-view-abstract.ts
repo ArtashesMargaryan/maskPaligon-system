@@ -1,7 +1,7 @@
 import { lego } from '@armathai/lego';
 import { AppModelEvent, ResultModelEvent } from '../../src/events/model';
-import { AppState } from '../../src/models/app-model';
-import { ResultState } from '../../src/models/result-model';
+import { AppState } from '../../src/models/app/app-model';
+import { ResultState } from '../../src/models/app/result-model';
 import { makeSprite } from '../../src/utils';
 import { AbstractButton } from '../../src/utils/button';
 

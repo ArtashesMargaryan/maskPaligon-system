@@ -1,5 +1,5 @@
 import { lego } from '@armathai/lego';
-import { ResultState } from '../../models/result-model';
+import { ResultState } from '../../models/app/result-model';
 import { startCompletionTimerCommand } from '../app/start-completion-timer-command';
 import { unmapGameCommandsCommand } from '../lego/unmap-game-commands-command';
 

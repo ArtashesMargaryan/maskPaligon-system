@@ -6,6 +6,15 @@ export enum AppModelEvent {
     retriesUpdate = 'AppModelRetriesUpdate',
 }
 
+export enum ResultModelEvent {
+    stateUpdate = 'ResultModelStateUpdate',
+}
+
+export enum SuperAppModelEvent {
+    pausedUpdate = 'SuperAppModelPausedUpdate',
+    mutedUpdate = 'SuperAppModelMutedUpdate',
+}
+
 export enum GameModelEvent {
     hintUpdate = 'GameModelHintUpdate',
 }
@@ -18,17 +27,8 @@ export enum ObservableModelEvent {
     uuidUpdate = 'ObservableModelUuidUpdate',
 }
 
-export enum ResultModelEvent {
-    stateUpdate = 'ResultModelStateUpdate',
-}
-
 export enum StoreEvent {
     superAppUpdate = 'StoreSuperAppUpdate',
     appUpdate = 'StoreAppUpdate',
     gameUpdate = 'StoreGameUpdate',
-}
-
-export enum SuperAppModelEvent {
-    pausedUpdate = 'SuperAppModelPausedUpdate',
-    mutedUpdate = 'SuperAppModelMutedUpdate',
 }

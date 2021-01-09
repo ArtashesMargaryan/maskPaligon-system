@@ -1,4 +1,4 @@
-import { ObservableModel } from './observable-model';
+import { ObservableModel } from '../observable-model';
 
 export class SuperAppModel extends ObservableModel {
     private _paused = false;

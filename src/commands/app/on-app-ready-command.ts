@@ -1,5 +1,5 @@
 import { lego } from '@armathai/lego';
-import { AppState } from '../../models/app-model';
+import { AppState } from '../../models/app/app-model';
 import { params } from '../../params';
 import { initializeParamAutoStartCommand } from '../core/initialize-param-autoStart-command';
 import { initializeParamMuteCommand } from '../core/initialize-param-mute-command';

@@ -2,8 +2,8 @@ import { lego } from '@armathai/lego';
 import { AppEvent } from '../events/app';
 import { AppModelEvent } from '../events/model';
 import { CloseViewEvent, WinViewEvent } from '../events/view';
-import { AppState } from '../models/app-model';
-import { ResultState } from '../models/result-model';
+import { AppState } from '../models/app/app-model';
+import { ResultState } from '../models/app/result-model';
 import { store } from '../models/store';
 
 export enum NativeEvents {

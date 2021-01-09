@@ -4,7 +4,7 @@ import { setResultStateCommand } from '../commands/result/set-result-state-comma
 import { getGameGridConfig } from '../constants/configs/grid-configs';
 import { getBgSpriteConfig } from '../constants/configs/sprite-configs';
 import { GameModelEvent, HintModelEvent } from '../events/model';
-import { ResultState } from '../models/result-model';
+import { ResultState } from '../models/app/result-model';
 import { makeSprite } from '../utils';
 import { HintView } from './hint-view';
 

@@ -1,6 +1,6 @@
 import { lego } from '@armathai/lego';
 import { Switch } from '../../constants/constants';
-import { setSuperAppPausedCommand } from '../super/set-super-app-paused-command';
+import { setSuperAppPausedCommand } from '../superapp/set-super-app-paused-command';
 
 export const initializeParamAutoStartCommand = (autostart: string): void => {
     switch (autostart) {
