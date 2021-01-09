@@ -1,5 +1,6 @@
 import { lego } from '@armathai/lego';
 import { AppEvent } from '../events/app';
+import { HintModelEvent } from '../events/model';
 import { getDisplayObjectByProperty } from '../utils';
 import { sample } from '../utils/array/sample';
 import { HandComponent } from './components/hand-component';
@@ -10,7 +11,10 @@ export class HintView extends HandComponent {
 
     public constructor() {
         super();
-        lego.event.on(AppEvent.resize, this._onAppResize, this);
+
+        lego.event
+            .on(HintModelEvent.visibleUpdate, this._onHintVisibleUpdate, this)
+            .on(AppEvent.resize, this._onAppResize, this);
     }
 
     public destroy(option?: ContainerDestroyOptions): void {
@@ -18,7 +22,7 @@ export class HintView extends HandComponent {
         super.destroy(option);
     }
 
-    public show(): void {
+    private _show(): void {
         const { winView, loseView } = getDisplayObjectByProperty('name', 'GameView') as GameView;
         this._target = sample([winView, loseView]);
         this.visible = true;
@@ -26,10 +30,14 @@ export class HintView extends HandComponent {
         this.play();
     }
 
-    public hide(): void {
+    private _hide(): void {
         this.stop();
         this.visible = false;
         this._target = null;
+    }
+
+    private _onHintVisibleUpdate(visible: boolean): void {
+        visible ? this._show() : this._hide();
     }
 
     private _onAppResize(): void {

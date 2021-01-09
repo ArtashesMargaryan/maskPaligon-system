@@ -3,7 +3,7 @@ import { ICellConfig, PixiGrid } from '@armathai/pixi-grid';
 import { setResultStateCommand } from '../commands/result/set-result-state-command';
 import { getGameGridConfig } from '../constants/configs/grid-configs';
 import { getBgSpriteConfig } from '../constants/configs/sprite-configs';
-import { GameModelEvent, HintModelEvent } from '../events/model';
+import { GameModelEvent } from '../events/model';
 import { ResultState } from '../models/app/result-model';
 import { makeSprite } from '../utils';
 import { HintView } from './hint-view';
@@ -20,9 +20,8 @@ export class GameView extends PixiGrid {
 
         this._build();
         this.parentGroup = superApp.app.stage.game;
-        lego.event
-            .on(GameModelEvent.hintUpdate, this._onHintUpdate, this)
-            .on(HintModelEvent.visibleUpdate, this._onHintVisibleUpdate, this);
+
+        lego.event.on(GameModelEvent.hintUpdate, this._onHintUpdate, this);
     }
 
     public getGridConfig(): ICellConfig {
@@ -79,9 +78,6 @@ export class GameView extends PixiGrid {
     // HINT
     private _onHintUpdate(hint: unknown): void {
         hint ? this._buildHint() : this._destroyHint();
-    }
-    private _onHintVisibleUpdate(visible: boolean): void {
-        visible ? this._hint.show() : this._hint.hide();
     }
 
     private _buildHint(): void {
