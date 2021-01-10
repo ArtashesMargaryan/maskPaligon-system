@@ -1,7 +1,7 @@
 import { lego } from '@armathai/lego';
 import { MainView } from '../../../constructor/default/src/main-view';
 import { AppEvent } from '../../events/app';
-import { fitDimension, lp } from '../../utils';
+import { fitDimension, getAndroidVersion, getIOSVersion, lp } from '../../utils';
 import { AssetsLoader } from '../assets-loader';
 import { Stage } from './stage';
 
@@ -84,7 +84,17 @@ export class App extends PIXI.Application {
     }
 
     private _resizeRenderer(width: number, height: number): void {
-        this.renderer.resize(width, height);
+        let wC = 1;
+        let hC = 1;
+        switch (true) {
+            case PIXI.utils.isMobile.android.device:
+                [wC, hC] = this._getAndroidRendererSizeCoefficient();
+                break;
+            case PIXI.utils.isMobile.apple.device:
+                [wC, hC] = this._getIOSRendererSizeCoefficient();
+                break;
+        }
+        this.renderer.resize(width * wC, height * hC);
     }
 
     private _resizeCanvas(width: number, height: number): void {
@@ -134,5 +144,35 @@ export class App extends PIXI.Application {
         const { width: screenWidth, height: screenHeight } = this.renderer.screen;
 
         return Math.min(screenWidth / screenHeight, screenHeight / screenWidth);
+    }
+
+    private _getAndroidRendererSizeCoefficient(): [number, number] {
+        const androidVersion = getAndroidVersion();
+        const v = parseFloat(androidVersion);
+        if (v >= 4.2 && v <= 4.3) {
+            return [0.5, 0.5];
+        }
+        if (v === 4.4) {
+            return [0.6, 0.6];
+        }
+        if (v >= 5 && v < 7) {
+            return [0.8, 0.8];
+        }
+        if (v >= 7 && v < 8) {
+            return [0.9, 0.9];
+        }
+        return [1, 1];
+    }
+
+    private _getIOSRendererSizeCoefficient(): [number, number] {
+        const iosVersion = getIOSVersion();
+        const v = parseFloat(iosVersion.join('.'));
+        if (v >= 10 && v < 12) {
+            return [0.6, 0.6];
+        }
+        if (v >= 12 && v < 13) {
+            return [0.8, 0.8];
+        }
+        return [1, 1];
     }
 }

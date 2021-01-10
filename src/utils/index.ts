@@ -265,3 +265,17 @@ export const muteOn = (): boolean => {
 export const soundAvailable = (): boolean => {
     return isWEBGL() && !muteOn();
 };
+
+export const getAndroidVersion = (): string => {
+    const ua = navigator.userAgent.toLowerCase();
+    const match = ua.match(/android\s([0-9\.]*)/i);
+    return match ? match[1] : undefined;
+};
+
+export const getIOSVersion = (): [number, number, number] => {
+    if (/iP(hone|od|ad)/.test(navigator.platform)) {
+        const v = navigator.appVersion.match(/OS (\d+)_(\d+)_?(\d+)?/);
+        return [parseInt(v[1], 10), parseInt(v[2], 10), parseInt(v[3] || '0', 10)];
+    }
+    return [0, 0, 0];
+};
