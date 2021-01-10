@@ -269,7 +269,7 @@ export const soundAvailable = (): boolean => {
 export const getAndroidVersion = (): string => {
     const ua = navigator.userAgent.toLowerCase();
     const match = ua.match(/android\s([0-9\.]*)/i);
-    return match ? match[1] : undefined;
+    return match ? match[1] : '0';
 };
 
 export const getIOSVersion = (): [number, number, number] => {
