@@ -184,7 +184,7 @@ export class AssetsLoader extends PIXI.utils.EventEmitter {
     }
 
     private async _loadSuperAtlas(): Promise<void> {
-        new Promise((resolve) => {
+        return new Promise((resolve) => {
             const regions = Object.keys(Images).map(
                 (img) =>
                     new AtlasRegion(
