@@ -38,9 +38,6 @@ export class App extends PIXI.Application {
 
         this.stage = new Stage();
 
-        console.warn(Device.osVersion);
-        console.warn(Device.performance);
-        console.warn(Device.rendererSizeCoefficient);
         this._calculateTransform();
         this._loadAssets();
 
@@ -89,7 +86,6 @@ export class App extends PIXI.Application {
 
     private _resizeRenderer(width: number, height: number): void {
         const [wC, hC] = Device.rendererSizeCoefficient;
-        console.warn(wC, hC);
         this.renderer.resize(width * wC, height * hC);
     }
 
