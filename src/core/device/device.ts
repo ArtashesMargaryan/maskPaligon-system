@@ -1,3 +1,5 @@
+import { Switch } from '../../constants/constants';
+import { params } from '../../params';
 import { DevicePerformance } from './device-performance';
 
 export class Device {
@@ -29,6 +31,14 @@ export class Device {
         return this._rendererSizeCoefficient;
     }
 
+    public static get webgl(): boolean {
+        return superApp.app.renderer.type === PIXI.RENDERER_TYPE.WEBGL;
+    }
+
+    public static get sound(): boolean {
+        return this.webgl && params.mute.value !== Switch.on;
+    }
+
     private static _detectPerformance(): DevicePerformance {
         switch (true) {
             case PIXI.utils.isMobile.android.device:
@@ -36,7 +46,7 @@ export class Device {
             case PIXI.utils.isMobile.apple.device:
                 return this._getIOSPerformance();
         }
-        return DevicePerformance.high;
+        return DevicePerformance.top;
     }
 
     private static _detectOsVersion(): string {

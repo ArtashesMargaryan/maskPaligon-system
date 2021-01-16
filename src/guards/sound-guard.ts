@@ -1,5 +1,5 @@
-import { soundAvailable } from '../utils';
+import { Device } from '../core/device/device';
 
 export function soundGuard(): boolean {
-    return soundAvailable();
+    return Device.sound;
 }

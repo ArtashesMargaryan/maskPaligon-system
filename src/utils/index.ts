@@ -1,6 +1,3 @@
-import { Switch } from '../constants/constants';
-import { params } from '../params';
-
 export const lp = <L, P>(l: L, p: P): L | P => {
     if (window.matchMedia('(orientation: portrait)').matches) {
         // you're in PORTRAIT mode
@@ -252,16 +249,4 @@ export const upperPowerOfTwo = (v: number): number => {
     v |= v >> 16;
     v++;
     return v;
-};
-
-export const isWEBGL = (): boolean => {
-    return superApp.app.renderer.type === PIXI.RENDERER_TYPE.WEBGL;
-};
-
-export const muteOn = (): boolean => {
-    return params.mute.value === Switch.on;
-};
-
-export const soundAvailable = (): boolean => {
-    return isWEBGL() && !muteOn();
 };

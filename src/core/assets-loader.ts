@@ -1,6 +1,7 @@
 import { assets, Images } from '../assets';
 import { params } from '../params';
-import { hasOwnProperty, isWEBGL, soundAvailable, upperPowerOfTwo } from '../utils';
+import { hasOwnProperty, upperPowerOfTwo } from '../utils';
+import { Device } from './device/device';
 
 export class AtlasRegion {
     public texture: PIXI.Texture;
@@ -77,9 +78,9 @@ export class AssetsLoader extends PIXI.utils.EventEmitter {
             this._loadImages(assets.images);
             this._loadImagesLocalized(assets.images_localized);
             this._loadAtlases(assets.atlases);
-            soundAvailable() && (await this._loadSounds(assets.sounds));
+            Device.sound && (await this._loadSounds(assets.sounds));
             await new Promise((cb: (value: void | PromiseLike<void>) => void) => this._loader.load(() => cb()));
-            isWEBGL() && (await this._loadSuperAtlas());
+            Device.webgl && (await this._loadSuperAtlas());
             this._loadSpines(assets.spines as Spines);
             resolve();
         });
