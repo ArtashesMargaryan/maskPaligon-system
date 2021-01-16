@@ -108,11 +108,11 @@ export class Device {
             case DevicePerformance.poor:
                 return [0.3, 0.3];
             case DevicePerformance.low:
-                return [0.5, 0.5];
+                return [0.4, 0.4];
             case DevicePerformance.medium:
-                return [0.8, 0.8];
+                return [0.7, 0.7];
             case DevicePerformance.high:
-                return [0.9, 0.9];
+                return [0.76, 0.76];
             default:
                 return [1, 1];
         }
@@ -121,9 +121,9 @@ export class Device {
     private static _getIOSRendererSizeCoefficient(): [number, number] {
         switch (this.performance) {
             case DevicePerformance.medium:
-                return [0.6, 0.6];
-            case DevicePerformance.high:
                 return [0.8, 0.8];
+            case DevicePerformance.high:
+                return [0.9, 0.9];
             default:
                 return [1, 1];
         }
