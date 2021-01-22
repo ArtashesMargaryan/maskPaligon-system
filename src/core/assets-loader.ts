@@ -24,7 +24,14 @@ type Spines = Record<
     string,
     {
         json: {
-            skins: [{ attachments: { [key: string]: { [key: string]: { type?: string; path?: string } } } }];
+            skins: [
+                {
+                    name: string;
+                    bones?: string[];
+                    attachments?: { [key: string]: { [key: string]: { type?: string; path?: string } } };
+                },
+            ];
+
             slots: { attachment: string }[];
             animations: { [key: string]: { slots: { [key: string]: { attachment: { name?: string }[] } } } };
         };
@@ -127,46 +134,47 @@ export class AssetsLoader extends PIXI.utils.EventEmitter {
             const spine = spines[s];
             const { json } = spine;
             const { animations, slots, skins } = json;
-            const attachments: string[] = [];
+            const attachments = new Set<string>();
 
             Object.keys(animations).forEach((k) => {
                 const { slots = {} } = animations[k];
                 Object.keys(slots).forEach((s) => {
                     const { attachment = [] } = slots[s];
                     attachment.forEach((a) => {
-                        const { name } = a;
-                        if (!attachments.includes(name)) {
-                            attachments.push(name);
-                        }
+                        attachments.add(a.name);
                     });
                 });
             });
 
             slots.forEach((slot: { [key: string]: string }) => {
                 const { attachment } = slot;
-                if (!attachments.includes(attachment)) {
-                    attachments.push(attachment);
-                }
+                attachments.add(attachment);
             });
 
             skins.forEach((skin) => {
-                const { attachments: skinAttachments } = skin;
-                Object.keys(skinAttachments).forEach((k1) => {
-                    const attachment = skinAttachments[k1];
-                    Object.keys(attachment).forEach((k2) => {
-                        const { type } = attachment[k2];
-                        if (!type || type === SpinesAttachmentType.region || type === SpinesAttachmentType.mesh) {
-                            let path = k2;
-                            const concreteAttachment = attachment[k2];
-                            if (hasOwnProperty(concreteAttachment, 'path')) {
-                                path = concreteAttachment.path;
+                const { attachments: skinAttachments, bones: skinBones } = skin;
+                if (skinAttachments) {
+                    Object.keys(skinAttachments).forEach((k1) => {
+                        const attachment = skinAttachments[k1];
+                        Object.keys(attachment).forEach((k2) => {
+                            const { type } = attachment[k2];
+                            if (!type || type === SpinesAttachmentType.region || type === SpinesAttachmentType.mesh) {
+                                let path = k2;
+                                const concreteAttachment = attachment[k2];
+                                if (hasOwnProperty(concreteAttachment, 'path')) {
+                                    path = concreteAttachment.path;
+                                }
+                                attachments.add(path);
                             }
-                            if (!attachments.includes(path)) {
-                                attachments.push(path);
-                            }
-                        }
+                        });
                     });
-                });
+                }
+
+                if (skinBones) {
+                    skinBones.forEach((path) => {
+                        attachments.add(path);
+                    });
+                }
             });
 
             const atlas = new PIXI.spine.core.TextureAtlas();
