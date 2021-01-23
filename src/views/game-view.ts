@@ -1,14 +1,12 @@
 import { lego } from '@armathai/lego';
-import { ICellConfig, PixiGrid } from '@armathai/pixi-grid';
 import { setResultStateCommand } from '../commands/result/set-result-state-command';
-import { getGameGridConfig } from '../constants/configs/grid-configs';
 import { getBgSpriteConfig } from '../constants/configs/sprite-configs';
 import { GameModelEvent } from '../events/model';
 import { ResultState } from '../models/app/result-model';
 import { makeSprite } from '../utils';
 import { HintView } from './hint-view';
 
-export class GameView extends PixiGrid {
+export class GameView extends PIXI.Container {
     public name = 'GameView';
     private _bg: PIXI.Sprite;
     private _winView: PIXI.Container;
@@ -24,10 +22,6 @@ export class GameView extends PixiGrid {
         lego.event.on(GameModelEvent.hintUpdate, this._onHintUpdate, this);
     }
 
-    public getGridConfig(): ICellConfig {
-        return getGameGridConfig();
-    }
-
     public get winView(): PIXI.Container {
         return this._winView;
     }
@@ -39,13 +33,6 @@ export class GameView extends PixiGrid {
     public destroy(option?: ContainerDestroyOptions): void {
         lego.event.removeListenersOf(this);
         super.destroy(option);
-    }
-
-    public rebuild(config?: ICellConfig): void {
-        super.rebuild(config);
-
-        this._winView.y -= 70;
-        this._loseView.y += 70;
     }
 
     private _build(): void {
@@ -70,9 +57,12 @@ export class GameView extends PixiGrid {
             callback: this._onLoseClick,
         });
 
-        this.setChild('game', this._bg);
-        this.setChild('game', this._winView);
-        this.setChild('game', this._loseView);
+        this.addChild(this._bg);
+        this.addChild(this._winView);
+        this.addChild(this._loseView);
+
+        this._winView.y -= 70;
+        this._loseView.y += 70;
     }
 
     // HINT

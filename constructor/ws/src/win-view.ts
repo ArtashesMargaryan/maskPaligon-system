@@ -12,7 +12,7 @@ const getGridConfig = (): ICellConfig => {
         {
             name: 'win',
             // debug: { color: 0xd95027 },
-            bounds: superApp.app.viewBounds,
+            bounds: superApp.app.appBounds,
             cells: [
                 {
                     name: 'blocker',
@@ -36,7 +36,7 @@ const getGridConfig = (): ICellConfig => {
         {
             name: 'win',
             // debug: { color: 0xd95027 },
-            bounds: superApp.app.viewBounds,
+            bounds: superApp.app.appBounds,
             cells: [
                 {
                     name: 'blocker',
@@ -166,7 +166,7 @@ export class WinView extends ResultViewAbstract {
 
     private _resizeConfetti(): void {
         if (this._confetti) {
-            const { width, height } = superApp.app.viewBounds;
+            const { width, height } = superApp.app.appBounds;
             this._confetti.onResize(width, height);
         }
     }

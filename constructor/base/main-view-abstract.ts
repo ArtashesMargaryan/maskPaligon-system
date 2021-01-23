@@ -56,10 +56,12 @@ export abstract class MainViewAbstract extends PixiGrid {
         this.rebuild(this.getGridConfig());
         this._updateScale();
         this._updateHitArea();
+
+        this._gameView.scale.set(superApp.app.gameScale);
     }
 
     protected build(): void {
-        this._updateScale();
+        // this._updateScale();
         this._setInteractive();
         this._updateHitArea();
         this._buildVignette();
@@ -68,11 +70,11 @@ export abstract class MainViewAbstract extends PixiGrid {
     }
 
     private _updateScale(): void {
-        this.scale.set(superApp.app.viewScale);
+        this.scale.set(superApp.app.appScale);
     }
 
     private _updateHitArea(): void {
-        this.hitArea = new PIXI.Rectangle().copyFrom(superApp.app.viewBounds);
+        this.hitArea = new PIXI.Rectangle().copyFrom(superApp.app.appBounds);
     }
 
     private _setInteractive(): void {
@@ -106,6 +108,7 @@ export abstract class MainViewAbstract extends PixiGrid {
 
     private _buildGameView(): void {
         this.setChild('game', (this._gameView = new GameView()));
+        this.onResize();
     }
 
     private _destroyGameView(): void {

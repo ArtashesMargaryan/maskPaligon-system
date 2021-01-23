@@ -22,8 +22,14 @@ interface Document {
 
 type AppConfig = {
     size: {
-        landscape: { width: number; height: number };
-        portrait: { width: number; height: number };
+        design: {
+            landscape: { width: number; height: number };
+            portrait: { width: number; height: number };
+        };
+        game: {
+            landscape: { width: number; height: number };
+            portrait: { width: number; height: number };
+        };
         ratio: { min: number; max: number };
     };
 };

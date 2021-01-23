@@ -9,9 +9,10 @@ import { Stage } from './stage';
 export class App extends PIXI.Application {
     public stage: Stage;
     private _assetsLoader: AssetsLoader;
-    private _viewBounds: PIXI.Rectangle;
-    private _viewScale: number;
-    private _viewRatio: number;
+    private _appBounds: PIXI.Rectangle;
+    private _appScale: number;
+    private _appRatio: number;
+    private _gameScale: number;
 
     public constructor() {
         super({
@@ -20,16 +21,20 @@ export class App extends PIXI.Application {
         });
     }
 
-    public get viewBounds(): PIXI.Rectangle {
-        return this._viewBounds;
+    public get appBounds(): PIXI.Rectangle {
+        return this._appBounds;
     }
 
-    public get viewScale(): number {
-        return this._viewScale;
+    public get appScale(): number {
+        return this._appScale;
     }
 
-    public get viewRatio(): number {
-        return this._viewRatio;
+    public get appRatio(): number {
+        return this._appRatio;
+    }
+
+    public get gameScale(): number {
+        return this._gameScale;
     }
 
     public init(): void {
@@ -81,7 +86,7 @@ export class App extends PIXI.Application {
         this._resizeRenderer(width, height);
         this._calculateTransform();
 
-        lego.event.emit(AppEvent.resize, this.viewBounds, this.viewScale);
+        lego.event.emit(AppEvent.resize, this.appBounds, this.appScale);
     }
 
     private _resizeRenderer(width: number, height: number): void {
@@ -107,32 +112,46 @@ export class App extends PIXI.Application {
     }
 
     private _calculateTransform(): void {
-        this._viewScale = this._getViewScale();
-        this._viewBounds = this._getViewBounds();
-        this._viewRatio = this._getViewRatio();
+        this._appScale = this._getAppScale();
+        this._appBounds = this._getAppBounds();
+        this._appRatio = this._getAppRatio();
+        this._gameScale = this._getGameScale();
     }
 
-    private _getAppBounds(): PIXI.Rectangle {
-        const { width, height } = lp(appconfig.size.landscape, appconfig.size.portrait);
+    private _getDesignBounds(): PIXI.Rectangle {
+        const { width, height } = lp(appconfig.size.design.landscape, appconfig.size.design.portrait);
 
         return new PIXI.Rectangle(0, 0, width, height);
     }
 
-    private _getViewScale(): number {
+    private _getGameBounds(): PIXI.Rectangle {
+        const { width, height } = lp(appconfig.size.game.landscape, appconfig.size.game.portrait);
+
+        return new PIXI.Rectangle(0, 0, width, height);
+    }
+
+    private _getAppScale(): number {
         const { width: screenWidth, height: screenHeight } = this.renderer.screen;
-        const { width: designWidth, height: designHeight } = this._getAppBounds();
+        const { width: designWidth, height: designHeight } = this._getDesignBounds();
 
         return Math.min(screenWidth / designWidth, screenHeight / designHeight);
     }
 
-    private _getViewBounds(): PIXI.Rectangle {
-        const { renderer, viewScale: scale } = this;
+    private _getGameScale(): number {
+        const { width: screenWidth, height: screenHeight } = this.renderer.screen;
+        const { width: designWidth, height: designHeight } = this._getGameBounds();
+
+        return Math.min(screenWidth / designWidth, screenHeight / designHeight) / this._appScale;
+    }
+
+    private _getAppBounds(): PIXI.Rectangle {
+        const { renderer, appScale: scale } = this;
         const { x, y, width, height } = renderer.screen;
 
         return new PIXI.Rectangle(x, y, width / scale, height / scale);
     }
 
-    private _getViewRatio(): number {
+    private _getAppRatio(): number {
         const { width: screenWidth, height: screenHeight } = this.renderer.screen;
 
         return Math.min(screenWidth / screenHeight, screenHeight / screenWidth);

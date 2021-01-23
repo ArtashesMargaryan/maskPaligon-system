@@ -11,7 +11,7 @@ const getGridConfig = (): ICellConfig => {
         {
             name: 'win',
             // debug: { color: 0xd95027 },
-            bounds: superApp.app.viewBounds,
+            bounds: superApp.app.appBounds,
             cells: [
                 {
                     name: 'blocker',
@@ -28,7 +28,7 @@ const getGridConfig = (): ICellConfig => {
         {
             name: 'win',
             // debug: { color: 0xd95027 },
-            bounds: superApp.app.viewBounds,
+            bounds: superApp.app.appBounds,
             cells: [
                 {
                     name: 'blocker',

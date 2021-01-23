@@ -9,11 +9,12 @@ const getGridConfig = (): ICellConfig => {
     return lp(
         {
             name: 'main',
-            bounds: superApp.app.viewBounds,
+            bounds: superApp.app.appBounds,
             cells: [
                 {
                     name: 'game',
                     bounds: { x: 0, y: 0, width: 1, height: 1 },
+                    scale: CellScale.none,
                 },
                 {
                     name: 'result',
@@ -28,7 +29,7 @@ const getGridConfig = (): ICellConfig => {
                     name: 'close_btn',
                     bounds: { x: 0, y: 0, width: 1, height: 1 },
                     align: CellAlign.leftTop,
-                    offset: { x: superApp.app.viewRatio > 0.55 ? 20 : 60, y: 20 },
+                    offset: { x: superApp.app.appRatio > 0.55 ? 20 : 60, y: 20 },
                 },
                 {
                     name: 'blocker',
@@ -39,11 +40,12 @@ const getGridConfig = (): ICellConfig => {
         },
         {
             name: 'main',
-            bounds: superApp.app.viewBounds,
+            bounds: superApp.app.appBounds,
             cells: [
                 {
                     name: 'game',
                     bounds: { x: 0, y: 0, width: 1, height: 1 },
+                    scale: CellScale.none,
                 },
                 {
                     name: 'result',
@@ -58,7 +60,7 @@ const getGridConfig = (): ICellConfig => {
                     name: 'close_btn',
                     bounds: { x: 0, y: 0, width: 1, height: 1 },
                     align: CellAlign.leftTop,
-                    offset: { x: 20, y: superApp.app.viewRatio > 0.55 ? 20 : 50 },
+                    offset: { x: 20, y: superApp.app.appRatio > 0.55 ? 20 : 50 },
                 },
                 {
                     name: 'blocker',
