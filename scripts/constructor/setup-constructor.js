@@ -1,6 +1,8 @@
 const { name: packageName } = require('../../package.json');
 const commonConstructor = require('./common-constructor');
-const constructorName = packageName.match(new RegExp(/(?<=playrix-).*(?=_)/)) || 'default';
+
+const constructorNameMatches = packageName.match(new RegExp(/(?<=playrix-).*(?=_)/));
+const constructorName = constructorNameMatches ? constructorNameMatches[0] : 'default';
 
 switch (constructorName) {
     case 'ws':
