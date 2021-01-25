@@ -15,9 +15,9 @@ export enum NativeEvents {
     finish = 'finish',
 }
 
-class DummyNativeInterface implements NativeInterface {
+class DefaultNativeInterface implements NativeInterface {
     public postMessage(msg: string): void {
-        void msg;
+        parent.postMessage(msg, '*');
     }
 }
 
@@ -71,6 +71,6 @@ export class NativeInterfaceObservant {
         this._nativeInterface =
             window.nativeInterface ||
             (window.webkit && window.webkit.messageHandlers.nativeInterface) ||
-            new DummyNativeInterface();
+            new DefaultNativeInterface();
     }
 }
