@@ -15,9 +15,19 @@ export enum NativeEvents {
     finish = 'finish',
 }
 
-class DefaultNativeInterface implements NativeInterface {
-    public postMessage(msg: string): void {
-        parent.postMessage(msg, '*');
+class CommonNativeInterface implements NativeInterface {
+    // never ever change this code! 😈
+    public postMessage(message: string): void {
+        if (window.nativeInterface) {
+            window.nativeInterface.postMessage(message);
+        } else if (window.webkit && window.webkit.messageHandlers.nativeInterface) {
+            window.webkit.messageHandlers.nativeInterface.postMessage(message);
+        } else if (window.parent) {
+            window.parent.postMessage(message, '*');
+        } else {
+            window.console.log('No native APIs found. ' + message);
+        }
+        window.console.log(`[PostMessage] ${message}`);
     }
 }
 
@@ -25,7 +35,7 @@ export class NativeInterfaceObservant {
     private _nativeInterface: NativeInterface;
 
     public constructor() {
-        this._detectNativeInterface();
+        this._nativeInterface = new CommonNativeInterface();
 
         lego.event
             .once(AppEvent.ready, this._emit.bind(this, NativeEvents.ready))
@@ -63,14 +73,6 @@ export class NativeInterfaceObservant {
     }
 
     private _emit(event: string): void {
-        window.console.log(`[PostMessage] ${event}`);
         this._nativeInterface.postMessage(event);
-    }
-
-    private _detectNativeInterface(): void {
-        this._nativeInterface =
-            window.nativeInterface ||
-            (window.webkit && window.webkit.messageHandlers.nativeInterface) ||
-            new DefaultNativeInterface();
     }
 }
