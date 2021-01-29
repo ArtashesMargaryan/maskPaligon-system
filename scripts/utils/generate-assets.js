@@ -5,6 +5,7 @@ const getDirectories = require('./get-directories');
 const getFilesRecursively = require('./get-files-recursively');
 const getFiles = require('./get-files');
 const trimExt = require('./trim-ext');
+const camelize = require('./camelize');
 
 const cwd = process.cwd();
 
@@ -58,13 +59,23 @@ function processSpines(p) {
     const files = getFilesRecursively(p);
     let spines = '';
     const value = files.reduce((str, spine) => {
+        const spineStr = readFileSync(spine, 'utf-8');
+        const spineJson = JSON.parse(spineStr);
+        const { animations } = spineJson;
+        const animationsString = Object.keys(animations).reduce(
+            (acc, animation) => `${acc}'${camelize(animation)}':'${animation}',`,
+            '',
+        );
         const key = path.basename(spine, path.extname(spine));
         const value = `{
             json: require('${spine.replace(cwd, '..')}'),
             scale: 1,
             skeleton: null as PIXI.spine.core.SkeletonData,
         }`;
-        spines += `'${key}': null as PIXI.spine.core.SkeletonData,`;
+        spines += `'${key}': {
+            'animations':{${animationsString}},
+            'skeleton': null as PIXI.spine.core.SkeletonData,
+        },`;
         str += `'${key}':${value},`;
         return str;
     }, '');
@@ -197,8 +208,8 @@ module.exports = () => {
         spines.length > 0
             ? `Object.keys(Spines).forEach((key) => {
                 const k = key as keyof typeof Spines;
-                delete Spines[k];
-                Object.defineProperty(Spines, k, {
+                delete Spines[k]['skeleton'];
+                Object.defineProperty(Spines[k], 'skeleton', {
                     get(): PIXI.spine.core.SkeletonData {
                         return assets.spines[k].skeleton;
                     },
