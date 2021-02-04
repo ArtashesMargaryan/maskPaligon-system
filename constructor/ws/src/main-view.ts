@@ -73,8 +73,6 @@ const getGridConfig = (): ICellConfig => {
 };
 
 export class MainView extends MainViewAbstract {
-    protected curtainTweenRepeatDelay = 0.6;
-
     public constructor() {
         super();
         this.build();
