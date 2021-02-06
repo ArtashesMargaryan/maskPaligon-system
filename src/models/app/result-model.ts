@@ -33,6 +33,6 @@ export class ResultModel extends ObservableModel {
 
     public initialize(): void {
         this._state = ResultState.unknown;
-        this._delay = 0.2;
+        this._delay = 0;
     }
 }
