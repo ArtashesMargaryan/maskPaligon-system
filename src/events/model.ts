@@ -8,6 +8,7 @@ export enum AppModelEvent {
 
 export enum ResultModelEvent {
     stateUpdate = 'ResultModelStateUpdate',
+    delayUpdate = 'ResultModelDelayUpdate',
 }
 
 export enum SuperAppModelEvent {

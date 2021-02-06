@@ -57,8 +57,12 @@ export class AppModel extends ObservableModel {
         this._retries = value;
     }
 
-    public startCompletionTimer(delay: number): void {
-        delayRunnable(delay, () => {
+    public initialize(): void {
+        this.result.initialize();
+    }
+
+    public startCompletionTimer(): void {
+        delayRunnable(this.result.delay, () => {
             this._state = AppState.result;
         });
     }

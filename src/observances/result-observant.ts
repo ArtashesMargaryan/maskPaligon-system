@@ -1,4 +1,5 @@
 import { lego } from '@armathai/lego';
+import { setResultDelayCommand } from '../commands/result/set-result-delay-command';
 import { setResultStateCommand } from '../commands/result/set-result-state-command';
 import { AppState } from '../models/app/app-model';
 import { ResultState } from '../models/app/result-model';
@@ -25,10 +26,22 @@ export class ResultObservant {
     };
 
     private _winGame(): void {
-        lego.command.payload(ResultState.success).execute(setResultStateCommand);
+        lego.command
+            //
+            .payload(0)
+            .execute(setResultDelayCommand)
+
+            .payload(ResultState.success)
+            .execute(setResultStateCommand);
     }
 
     private _loseGame(): void {
-        lego.command.payload(ResultState.fail).execute(setResultStateCommand);
+        lego.command
+            //
+            .payload(0)
+            .execute(setResultDelayCommand)
+
+            .payload(ResultState.fail)
+            .execute(setResultStateCommand);
     }
 }

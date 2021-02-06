@@ -11,7 +11,6 @@ export const onResultStateUpdateCommand = (state: ResultState): void => {
                 //
                 .execute(unmapGameCommandsCommand)
 
-                .payload(0)
                 .execute(startCompletionTimerCommand);
             break;
     }
