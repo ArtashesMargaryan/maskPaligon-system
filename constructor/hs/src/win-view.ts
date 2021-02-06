@@ -136,7 +136,7 @@ const getPopupAustinShowTweenConfig = (): TweenConfig => {
     };
 };
 
-const getPopupTitleTweenConfig = (): TweenConfig => {
+const getPopupTitleShowTweenConfig = (): TweenConfig => {
     return {
         pixi: { angle: -90 },
         ease: PIXI.tween.easeElasticOut.config(1.04, 0.5),
@@ -170,7 +170,7 @@ class WinPopup extends PIXI.Container {
             .timeline()
             .add([
                 PIXI.tween.from(this._austin, getPopupAustinShowTweenConfig()),
-                PIXI.tween.from(this._title, getPopupTitleTweenConfig()),
+                PIXI.tween.from(this._title, getPopupTitleShowTweenConfig()),
             ]);
     }
 

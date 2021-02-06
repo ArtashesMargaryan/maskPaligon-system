@@ -27,8 +27,7 @@ const getGridConfig = (): ICellConfig => {
                 },
                 {
                     name: 'subtitle',
-                    bounds: { x: 0, y: 0, width: 1, height: 1 },
-                    offset: { x: 0, y: 200 },
+                    bounds: { x: 0, y: 0.7, width: 1, height: 0.3 },
                     padding: 0.05,
                 },
             ],
@@ -51,8 +50,7 @@ const getGridConfig = (): ICellConfig => {
                 },
                 {
                     name: 'subtitle',
-                    bounds: { x: 0, y: 0, width: 1, height: 1 },
-                    offset: { x: 0, y: 200 },
+                    bounds: { x: 0, y: 0.7, width: 1, height: 0.3 },
                     padding: 0.05,
                 },
             ],
@@ -185,7 +183,7 @@ const getPopupTitleSpriteConfig = (): SpriteConfig => ({
     texture: Images['title'],
 });
 
-const getPopupLabelShowTweenConfig = (): TweenConfig => {
+const getPopupTitleShowTweenConfig = (): TweenConfig => {
     return {
         universal: true,
         pixi: { scale: 0.5, alpha: 0 },
@@ -229,11 +227,15 @@ class WinPopup extends PIXI.Container {
         this.addChild((this._title = title));
     }
 
+    public getBounds(): PIXI.Rectangle {
+        return this._title.getBounds();
+    }
+
     public show(): void {
         PIXI.tween
             .timeline({ universal: true })
             .add([
-                PIXI.tween.from(this._title, getPopupLabelShowTweenConfig()),
+                PIXI.tween.from(this._title, getPopupTitleShowTweenConfig()),
                 PIXI.tween.from(this._rays, getPopupRaysShowTweenConfig()),
                 PIXI.tween.to(this._rays, getPopupRaysIdleTweenConfig()),
             ]);

@@ -1,5 +1,5 @@
 import { lego } from '@armathai/lego';
-import { CellAlign, CellScale, ICellConfig } from '@armathai/pixi-grid';
+import { CellScale, ICellConfig } from '@armathai/pixi-grid';
 import { Images } from '../../../src/assets';
 import { LoseViewEvent } from '../../../src/events/view';
 import { lp, makeSprite } from '../../../src/utils';
@@ -21,12 +21,13 @@ const getGridConfig = (): ICellConfig => {
                 },
                 {
                     name: 'popup',
-                    bounds: { x: 0, y: 0, width: 1, height: 0.78 },
+                    bounds: { x: 0, y: 0, width: 1, height: 1 },
+                    offset: { x: 0, y: -80 },
                 },
                 {
                     name: 'button',
-                    bounds: { x: 0, y: 0.78, width: 1, height: 1 - 0.78 },
-                    align: CellAlign.centerTop,
+                    bounds: { x: 0, y: 0, width: 1, height: 1 },
+                    offset: { x: 0, y: 200 },
                 },
             ],
         },
@@ -42,12 +43,13 @@ const getGridConfig = (): ICellConfig => {
                 },
                 {
                     name: 'popup',
-                    bounds: { x: 0, y: 0, width: 1, height: 0.78 },
+                    bounds: { x: 0, y: 0, width: 1, height: 1 },
+                    offset: { x: 0, y: -80 },
                 },
                 {
                     name: 'button',
-                    bounds: { x: 0, y: 0.78, width: 1, height: 1 - 0.78 },
-                    align: CellAlign.centerTop,
+                    bounds: { x: 0, y: 0, width: 1, height: 1 },
+                    offset: { x: 0, y: 200 },
                 },
             ],
         },

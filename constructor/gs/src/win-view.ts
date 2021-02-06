@@ -27,8 +27,7 @@ const getGridConfig = (): ICellConfig => {
                 },
                 {
                     name: 'subtitle',
-                    bounds: { x: 0, y: 0, width: 1, height: 1 },
-                    offset: { x: 0, y: 210 },
+                    bounds: { x: 0, y: 0.7, width: 1, height: 0.3 },
                     padding: 0.1,
                 },
             ],
@@ -51,8 +50,7 @@ const getGridConfig = (): ICellConfig => {
                 },
                 {
                     name: 'subtitle',
-                    bounds: { x: 0, y: 0, width: 1, height: 1 },
-                    offset: { x: 0, y: 210 },
+                    bounds: { x: 0, y: 0.7, width: 1, height: 0.3 },
                     padding: 0.1,
                 },
             ],

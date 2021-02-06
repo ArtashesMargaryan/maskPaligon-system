@@ -27,8 +27,7 @@ const getGridConfig = (): ICellConfig => {
                 },
                 {
                     name: 'subtitle',
-                    bounds: { x: 0, y: 0, width: 1, height: 1 },
-                    offset: { x: 0, y: 250 },
+                    bounds: { x: 0, y: 0.7, width: 1, height: 0.3 },
                     padding: 0.1,
                 },
             ],
@@ -51,8 +50,7 @@ const getGridConfig = (): ICellConfig => {
                 },
                 {
                     name: 'subtitle',
-                    bounds: { x: 0, y: 0, width: 1, height: 1 },
-                    offset: { x: 0, y: 250 },
+                    bounds: { x: 0, y: 0.7, width: 1, height: 0.3 },
                     padding: 0.1,
                 },
             ],
@@ -190,7 +188,7 @@ const getPopupTitleSpriteConfig = (): SpriteConfig => ({
     texture: Images['title'],
 });
 
-const getPopupLabelShowTweenConfig = (): TweenConfig => {
+const getPopupTitleShowTweenConfig = (): TweenConfig => {
     return {
         pixi: { angle: -90 },
         ease: PIXI.tween.easeElasticOut.config(1, 0.38),
@@ -221,7 +219,7 @@ const getPopupRaysIdleTweenConfig = (): TweenConfig => {
 
 class WinPopup extends PIXI.Container {
     private _rays: PIXI.Sprite;
-    private _label: PIXI.Sprite;
+    private _title: PIXI.Sprite;
 
     public constructor() {
         super();
@@ -233,14 +231,18 @@ class WinPopup extends PIXI.Container {
         text.position.set(0, text.pivot.y);
 
         this.addChild((this._rays = rays));
-        this.addChild((this._label = text));
+        this.addChild((this._title = text));
+    }
+
+    public getBounds(): PIXI.Rectangle {
+        return this._title.getBounds();
     }
 
     public show(): void {
         PIXI.tween
             .timeline({ universal: true })
             .add([
-                PIXI.tween.from(this._label, getPopupLabelShowTweenConfig()),
+                PIXI.tween.from(this._title, getPopupTitleShowTweenConfig()),
                 PIXI.tween.from(this._rays, getPopupRaysShowTweenConfig()),
                 PIXI.tween.to(this._rays, getPopupRaysIdleTweenConfig()),
             ]);
