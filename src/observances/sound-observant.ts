@@ -39,9 +39,10 @@ export class SoundObservant {
     }
 
     private _onAppResult(): void {
+        Object.keys(Sounds).forEach((key) => PIXI.sound.stop(key));
+
         const soundKey = store.app.result.state === ResultState.success ? Sounds['win'] : Sounds['lose'];
         PIXI.sound.fadeIn(soundKey, 0.2, { volume: 1 });
-        PIXI.sound.stop(Sounds['theme']);
     }
 
     private _playTheme(): void {
