@@ -13,8 +13,10 @@ export class SoundObservant {
             .on(AppEvent.pause, this._pauseAll, this)
             .on(AppEvent.resume, this._resumeAll, this)
             .on(AppEvent.mute, this._muteAll, this)
-            .on(AppEvent.unmute, this._unmuteAll, this)
+            .on(AppEvent.unmute, this._unmuteAll, this);
 
+        return;
+        lego.event
             .on(AppModelEvent.stateUpdate, this._onAppStateUpdate, this)
             .on(LoseViewEvent.retryBtnClick, this._playTap, this)
             .on(WinViewEvent.claimBtnClick, this._playTap, this)
