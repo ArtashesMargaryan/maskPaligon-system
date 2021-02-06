@@ -12,6 +12,8 @@ export class HintView extends HandComponent {
     public constructor() {
         super();
 
+        this.visible = false;
+
         lego.event
             .on(HintModelEvent.visibleUpdate, this._onHintVisibleUpdate, this)
             .on(AppEvent.resize, this._onAppResize, this);

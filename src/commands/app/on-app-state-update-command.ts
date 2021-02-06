@@ -24,7 +24,6 @@ export const onAppStateUpdateCommand = (state: AppState): void => {
 
                 .guard(firstGameGuard)
                 .execute(initializeHintModelCommand);
-
             break;
 
         case AppState.result:

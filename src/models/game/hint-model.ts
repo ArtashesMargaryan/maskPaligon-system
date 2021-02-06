@@ -17,6 +17,6 @@ export class HintModel extends ObservableModel {
     }
 
     public initialize(): void {
-        this._visible = true;
+        //
     }
 }
