@@ -1,6 +1,7 @@
 import { lego } from '@armathai/lego';
 import { PixiGrid } from '@armathai/pixi-grid';
 import { getVignetteSpriteConfig } from '../../src/constants/configs/sprite-configs';
+import { Switch } from '../../src/constants/constants';
 import { AppEvent } from '../../src/events/app';
 import { AppModelEvent, StoreEvent } from '../../src/events/model';
 import { LoseViewEvent, MainViewEvent } from '../../src/events/view';
@@ -88,7 +89,7 @@ export abstract class MainViewAbstract extends PixiGrid {
     }
 
     private _buildCloseBtn(): void {
-        if (params.closeBtn.value) {
+        if (params.closeBtn.value === Switch.on) {
             const closeBtn = this.getCloseBtnView();
             this.setChild('close_btn', closeBtn);
         }
