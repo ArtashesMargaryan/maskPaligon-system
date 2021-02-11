@@ -20,11 +20,8 @@ const getCurtainShowTweenConfig = (target: PIXI.DisplayObject): TweenConfig => {
     return {
         universal: true,
         pixi: { alpha: 0 },
-        duration: 0.5,
+        duration: 0.4,
         ease: PIXI.tween.easeSineInOut,
-        repeat: 1,
-        repeatDelay: 0.6,
-        yoyo: true,
         onStart: () => {
             target.alpha = 0;
             target.visible = true;
@@ -144,9 +141,20 @@ export abstract class MainViewAbstract extends PixiGrid {
     }
 
     private _onLoseViewHideComplete(): void {
-        PIXI.tween.from(this._curtain, getCurtainShowTweenConfig(this._curtain)).eventCallback('onRepeat', () => {
-            lego.event.emit(MainViewEvent.curtainComplete);
-        });
+        const tween = PIXI.tween.from(this._curtain, getCurtainShowTweenConfig(this._curtain));
+
+        if (process.env.NODE_ENV === 'production') {
+            tween.eventCallback('onComplete', () => {
+                lego.event.emit(MainViewEvent.curtainComplete);
+            });
+        } else {
+            tween.eventCallback('onRepeat', () => {
+                lego.event.emit(MainViewEvent.curtainComplete);
+            });
+            tween.yoyo(true);
+            tween.repeat(1);
+            tween.repeatDelay(0.2);
+        }
     }
 
     protected abstract getCloseBtnView(): CloseBtnViewAbstract;

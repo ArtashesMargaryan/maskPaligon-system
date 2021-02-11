@@ -34,6 +34,10 @@ export const onAppStateUpdateCommand = (state: AppState): void => {
             break;
 
         case AppState.retry:
+            if (process.env.NODE_ENV === 'production') {
+                return;
+            }
+
             lego.command
                 //
                 .execute(increaseRetriesCountCommand)
