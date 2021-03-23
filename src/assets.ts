@@ -7,7 +7,9 @@ export const assets = {
         'constructor/hand.png': require('../assets/images/constructor/hand.png').default,
         'bg.jpg': require('../assets/images/bg.jpg').default,
         'icon.png': require('../assets/images/icon.png').default,
+        'red.png': require('../assets/images/red.png').default,
         'vignette.png': require('../assets/images/vignette.png').default,
+        'yellow.png': require('../assets/images/yellow.png').default,
     },
     images_localized: {
         'retry.png': {
@@ -40,7 +42,9 @@ export const Images = {
     'constructor/hand': 'constructor/hand.png',
     bg: 'bg.jpg',
     icon: 'icon.png',
+    red: 'red.png',
     vignette: 'vignette.png',
+    yellow: 'yellow.png',
     retry: 'retry.png',
     subtitle: 'subtitle.png',
     title: 'title.png',
